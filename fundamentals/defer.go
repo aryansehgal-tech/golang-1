@@ -12,7 +12,7 @@ func stacking_defers() {
 	}
 
 	fmt.Println("done")
-}
+}	
 
 func main() {
 	defer fmt.Println("world")
