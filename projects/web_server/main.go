@@ -8,10 +8,11 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", handleHello)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", handleHello)
 	// nil means "use the default ServeMux" (the default router)
 	// log.Fatal will log an error AND stop the program if server fails
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8080", mux))
 }
 
 // w = ResponseWriter (used to send data back to client)
