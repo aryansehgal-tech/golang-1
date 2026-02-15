@@ -1,8 +1,13 @@
 package controllers
 
-import "github.com/gin-gonic/gin"
+import (
+	"go-tutorial/services"
+	"github.com/gin-gonic/gin"
+)
 
-type NotesController struct {}
+type NotesController struct {
+	notesServices services.NotesServices
+}
 
 func (n *NotesController) InitNotesControllerRoutes(router *gin.Engine) {
 	notes := router.Group("/notes")
@@ -13,7 +18,7 @@ func (n *NotesController) InitNotesControllerRoutes(router *gin.Engine) {
 func (n *NotesController) GetNotes() gin.HandlerFunc{
 	return func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"notes":"Get Request Notes",
+			"notes": n.notesServices.GetNotesServices(),
 		})
 	}
 }
@@ -21,7 +26,7 @@ func (n *NotesController) GetNotes() gin.HandlerFunc{
 func (n *NotesController) CreateNotes() gin.HandlerFunc{
 	return func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"notes":"Post Request Notes",
+			"notes": n.notesServices.CreateNotesServices(),
 		})
 	}
 }
