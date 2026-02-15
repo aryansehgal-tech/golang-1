@@ -7,9 +7,11 @@ import (
 	"net/http" 
 )
 
+
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handleHello)
+	mux.HandleFunc("/goodbye", handleGoodbye)
 	// nil means "use the default ServeMux" (the default router)
 	// log.Fatal will log an error AND stop the program if server fails
 	log.Fatal(http.ListenAndServe(":8080", mux))
@@ -31,5 +33,16 @@ func handleHello(w http.ResponseWriter, _ *http.Request) {
 		slog.Error("Error writing response", "err", err)
 		return 
 	}
+	fmt.Printf("%d bytes written\n", wc)
+}
+
+func handleGoodbye(w http.ResponseWriter, _ *http.Request) {
+	wc, err := w.Write([]byte("GoodBye"))
+
+	if err != nil {
+		slog.Error("Error writing response", "err", err)
+		return
+	}
+
 	fmt.Printf("%d bytes written\n", wc)
 }
