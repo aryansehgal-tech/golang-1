@@ -1,7 +1,17 @@
 package services
 
-type NotesServices struct {
+import (
+	"gorm.io/gorm"
+	internal "gin_tutorial/internal/model"
+)
 
+type NotesServices struct {
+	db *gorm.DB
+}
+
+func (n *NotesServices) InitService(database *gorm){
+	n.db=database
+	n.db.Automigrate(&internal.Notes{})
 }
 
 type Note struct {

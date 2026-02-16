@@ -4,12 +4,24 @@ import (
 	// "net/http"
 
 	"go-tutorial/controllers"
+	internal "go-tutorial/internal/database"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	router := gin.Default()
+	
+	db:=internal.InitDB()
+
+	if db == nil{
+		//error while connecting to the db
+		return
+	}
+
+	notesService := &NotesServices{}
+	notesService.InitService(db)
+
 	// router.GET("/ping", func(c *gin.Context) {
 	// 	c.JSON(http.StatusOK, gin.H {
 	// 		"message": "pong from gin",

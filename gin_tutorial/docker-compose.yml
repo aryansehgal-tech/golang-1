@@ -9,4 +9,4 @@ services:
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgresaaaa
+      POSTGRES_DB: postgres
